@@ -120,9 +120,19 @@ public final class QueryUtils {
                 String webTitle = current_News.getString("webTitle");
                 String webPublicationDate = current_News.getString("webPublicationDate");
                 String webUrl = current_News.getString("webUrl");
+                JSONArray tagsArray = current_News.getJSONArray("tags");
                 String webAuthor = "";
 
-                News mynews = new News(sectionName, webTitle, webAuthor,webPublicationDate, webUrl);
+                if (tagsArray.length() == 0) {
+                    webAuthor = null;
+                } else {
+                    for (int j = 0; j < tagsArray.length(); j++) {
+                        JSONObject firstObject = tagsArray.getJSONObject(j);
+                        webAuthor += firstObject.getString("webTitle") + ". ";
+                    }
+                }
+
+                News mynews = new News(sectionName, webTitle, webAuthor, webPublicationDate, webUrl);
 
                 news.add(mynews);
             }

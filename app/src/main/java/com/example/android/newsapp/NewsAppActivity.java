@@ -33,8 +33,8 @@ public class NewsAppActivity extends AppCompatActivity
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String LOG_TAG = NewsAppActivity.class.getSimpleName();
-    private static final String news_api_url = "http://content.guardianapis.com/search";
-    private static final String api_key = "c02a9922-ec3b-41bf-85d2-4124e5832b45";
+    private static final String news_api_url = "https://content.guardianapis.com/search?&show-tags=contributor&api-key=test";
+
 
     private String searchQuery;
     private NewsAdapter newsAdapter;
@@ -131,7 +131,6 @@ public class NewsAppActivity extends AppCompatActivity
         //createUrl
         Uri baseUri = Uri.parse(news_api_url);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("api-key", api_key);
         uriBuilder.appendQueryParameter("page-size", max_results);
         if (searchQuery != null) {
             uriBuilder.appendQueryParameter("q", searchQuery);
